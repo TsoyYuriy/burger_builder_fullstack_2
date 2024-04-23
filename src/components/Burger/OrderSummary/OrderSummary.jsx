@@ -19,6 +19,9 @@ export const OrderSummary = ({ingred, price}) => {
       </ul>
       <p>Total price: {price}</p>
       <p>Continue to checkout?</p>
+      
+      <button>Cancel</button>
+      <button>Continue</button>
     </div>
   )
 }

@@ -6,7 +6,6 @@ import { ING_PRICE } from "../../utils.constants";
 import { Modal } from "../../components/UI/Modal/Modal";
 import { OrderSummary } from "../../components/Burger/OrderSummary/OrderSummary";
 
-
 export const MainPage = () => {
   const [ingredients, setIngredients] = useState({
     salad: 0,
@@ -19,18 +18,17 @@ export const MainPage = () => {
   const [isShowModal, setIsShowModal] = useState(false);
 
   const updatePurchase = (updateIngrs) => {
-
     const sum = Object.keys(updateIngrs)
-      .map(igKey => updateIngrs[igKey])
+      .map((igKey) => updateIngrs[igKey])
       .reduce((sum, el) => sum + el, 0);
 
-      setPurchasable(sum > 0);
-  }
- 
+    setPurchasable(sum > 0);
+  };
+
   const addIngHandler = (type) => {
     const oldCount = ingredients[type];
     const updateCount = oldCount + 1;
-    const updateIngrs = {...ingredients}
+    const updateIngrs = { ...ingredients };
     updateIngrs[type] = updateCount;
     setIngredients(updateIngrs);
 
@@ -39,16 +37,16 @@ export const MainPage = () => {
     const newPrice = oldPrice + priceAdded;
     setTotalPrice(newPrice);
 
-    updatePurchase(updateIngrs)
-  }
+    updatePurchase(updateIngrs);
+  };
 
   const removeIngHandler = (type) => {
     const oldCount = ingredients[type];
 
-    if(oldCount <= 0 ) return;
+    if (oldCount <= 0) return;
 
     const updateCount = oldCount - 1;
-    const updateIngrs = {...ingredients}
+    const updateIngrs = { ...ingredients };
     updateIngrs[type] = updateCount;
     setIngredients(updateIngrs);
 
@@ -57,15 +55,16 @@ export const MainPage = () => {
     const newPrice = oldPrice - priceAdded;
     setTotalPrice(newPrice);
 
-    updatePurchase(updateIngrs)
+    updatePurchase(updateIngrs);
+  };
 
-  }
+  const closeModalHandler = () => setIsShowModal(false)
 
   return (
     <>
-      <Burger ingredients={ingredients}/>
-      
-      <Controls 
+      <Burger ingredients={ingredients} />
+
+      <Controls
         totalPrice={totalPrice}
         ingredAdded={addIngHandler}
         ingredRemoved={removeIngHandler}
@@ -73,13 +72,8 @@ export const MainPage = () => {
         onClickShowModal={() => setIsShowModal(true)}
       />
 
-      <Modal 
-        show={isShowModal}
-      >
-        <OrderSummary
-          ingred={ingredients}
-          price={totalPrice}
-        />
+      <Modal show={isShowModal} closed={closeModalHandler}>
+        <OrderSummary ingred={ingredients} price={totalPrice} />
       </Modal>
     </>
   );
