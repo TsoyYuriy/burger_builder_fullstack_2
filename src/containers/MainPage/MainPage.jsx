@@ -13,7 +13,17 @@ export const MainPage = () => {
     meat: 0,
   });
   const [totalPrice, setTotalPrice] = useState(100);
+  const [purchasable, setPurchasable] = useState(false);
 
+  const updatePurchase = (updateIngrs) => {
+
+    const sum = Object.keys(updateIngrs)
+      .map(igKey => updateIngrs[igKey])
+      .reduce((sum, el) => sum + el, 0);
+
+      setPurchasable(sum > 0);
+  }
+ 
   const addIngHandler = (type) => {
     const oldCount = ingredients[type];
     const updateCount = oldCount + 1;
@@ -25,6 +35,8 @@ export const MainPage = () => {
     const oldPrice = totalPrice;
     const newPrice = oldPrice + priceAdded;
     setTotalPrice(newPrice);
+
+    updatePurchase(updateIngrs)
   }
 
   const removeIngHandler = (type) => {
@@ -41,6 +53,9 @@ export const MainPage = () => {
     const oldPrice = totalPrice;
     const newPrice = oldPrice - priceAdded;
     setTotalPrice(newPrice);
+
+    updatePurchase(updateIngrs)
+
   }
 
   return (
@@ -51,6 +66,7 @@ export const MainPage = () => {
         totalPrice={totalPrice}
         ingredAdded={addIngHandler}
         ingredRemoved={removeIngHandler}
+        purchasable={purchasable}
       />
     </>
   );

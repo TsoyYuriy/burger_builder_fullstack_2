@@ -1,8 +1,9 @@
 import React from "react";
 import { Conrol } from "./Control/Conrol";
 import { controls } from "../../utils.constants";
+import './controls.css';
 
-export const Controls = ({ totalPrice, ingredAdded, ingredRemoved }) => {
+export const Controls = ({ totalPrice, ingredAdded, ingredRemoved, purchasable }) => {
   return (
     <div>
       <p>
@@ -17,6 +18,8 @@ export const Controls = ({ totalPrice, ingredAdded, ingredRemoved }) => {
                 removed={() => ingredRemoved(contr.type)}
               />;
       })}
+
+      <button className="OrderButton" disabled={!purchasable}>Order now</button>
     </div>
   );
 };
