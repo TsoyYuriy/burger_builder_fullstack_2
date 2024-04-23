@@ -3,6 +3,8 @@ import "./main-page.css";
 import Burger from "../../components/Burger/Burger";
 import { Controls } from "../../components/Controls/Controls";
 import { ING_PRICE } from "../../utils.constants";
+import { Modal } from "../../components/UI/Modal/Modal";
+import { OrderSummary } from "../../components/Burger/OrderSummary/OrderSummary";
 
 
 export const MainPage = () => {
@@ -14,6 +16,7 @@ export const MainPage = () => {
   });
   const [totalPrice, setTotalPrice] = useState(100);
   const [purchasable, setPurchasable] = useState(false);
+  const [isShowModal, setIsShowModal] = useState(false);
 
   const updatePurchase = (updateIngrs) => {
 
@@ -67,7 +70,17 @@ export const MainPage = () => {
         ingredAdded={addIngHandler}
         ingredRemoved={removeIngHandler}
         purchasable={purchasable}
+        onClickShowModal={() => setIsShowModal(true)}
       />
+
+      <Modal 
+        show={isShowModal}
+      >
+        <OrderSummary
+          ingred={ingredients}
+          price={totalPrice}
+        />
+      </Modal>
     </>
   );
 };

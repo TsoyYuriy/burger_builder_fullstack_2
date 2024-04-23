@@ -3,7 +3,7 @@ import { Conrol } from "./Control/Conrol";
 import { controls } from "../../utils.constants";
 import './controls.css';
 
-export const Controls = ({ totalPrice, ingredAdded, ingredRemoved, purchasable }) => {
+export const Controls = ({ totalPrice, ingredAdded, ingredRemoved, purchasable, onClickShowModal }) => {
   return (
     <div>
       <p>
@@ -19,7 +19,7 @@ export const Controls = ({ totalPrice, ingredAdded, ingredRemoved, purchasable }
               />;
       })}
 
-      <button className="OrderButton" disabled={!purchasable}>Order now</button>
+      <button className="OrderButton" disabled={!purchasable} onClick={onClickShowModal}>Order now</button>
     </div>
   );
 };
