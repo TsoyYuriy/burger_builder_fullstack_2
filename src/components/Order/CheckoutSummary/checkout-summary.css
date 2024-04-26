@@ -1,0 +1,32 @@
+.CheckoutSummary {
+  text-align: center;
+  width: 80%;
+  margin: auto;
+}
+
+.Danger,
+.Success {
+   background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.Success {
+    color: #5C9210;
+}
+
+.Danger {
+    color: #944317;
+}
+
+@media (min-width: 600px) {
+  .CheckoutSummary {
+      width: 500px;
+  }
+}

@@ -5,6 +5,7 @@ import { Controls } from "../../components/Controls/Controls";
 import { ING_PRICE } from "../../utils.constants";
 import { Modal } from "../../components/UI/Modal/Modal";
 import { OrderSummary } from "../../components/Burger/OrderSummary/OrderSummary";
+import { useNavigate } from "react-router-dom";
 
 export const MainPage = () => {
   const [ingredients, setIngredients] = useState({
@@ -13,9 +14,11 @@ export const MainPage = () => {
     cheese: 0,
     meat: 0,
   });
+
   const [totalPrice, setTotalPrice] = useState(100);
   const [purchasable, setPurchasable] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const updatePurchase = (updateIngrs) => {
     const sum = Object.keys(updateIngrs)
@@ -58,7 +61,11 @@ export const MainPage = () => {
     updatePurchase(updateIngrs);
   };
 
-  const closeModalHandler = () => setIsShowModal(false)
+  const closeModalHandler = () => setIsShowModal(false);
+
+  const purchaseContinueHandler = () => {
+    navigate('/checkout', {state: {ingredients, totalPrice}});
+  }
 
   return (
     <>
@@ -73,7 +80,12 @@ export const MainPage = () => {
       />
 
       <Modal show={isShowModal} closed={closeModalHandler}>
-        <OrderSummary ingred={ingredients} price={totalPrice} />
+        <OrderSummary
+          ingred={ingredients}
+          price={totalPrice}
+          onCloseModal={closeModalHandler}
+          onContinue={purchaseContinueHandler}
+        />
       </Modal>
     </>
   );

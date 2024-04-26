@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const OrderSummary = ({ingred, price}) => {
+export const OrderSummary = ({ingred, price, onCloseModal, onContinue}) => {
 
   const ingredients = Object.keys(ingred).map(igKey => {
     return (
@@ -20,8 +20,8 @@ export const OrderSummary = ({ingred, price}) => {
       <p>Total price: {price}</p>
       <p>Continue to checkout?</p>
       
-      <button>Cancel</button>
-      <button>Continue</button>
+      <button onClick={onCloseModal}>Cancel</button>
+      <button onClick={onContinue}>Continue</button>
     </div>
   )
 }
