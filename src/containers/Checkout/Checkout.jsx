@@ -1,26 +1,27 @@
 import React from "react";
 import { CheckoutSummary } from "../../components/Order/CheckoutSummary/CheckoutSummary";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { parsParams } from "../../utils/utils.functions";
 
 export const Checkout = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  // const {ingredients, totalPrice} = location.state;
 
-  const {ingredients, totalPrice} = location.state;
+  const [searchParams] = useSearchParams();
+  const pars = parsParams(searchParams);
 
-  console.log(location);
-  
+
   const onSuccess = () => {
-    navigate('form-data', {state: {ingredients, totalPrice}})
+    navigate('form-data', {state: {pars}})
   }
 
   return (
     <div>
       <CheckoutSummary 
-        ingredients={ingredients} 
+        ingredients={pars} 
         onSuccess={onSuccess} 
-        price={totalPrice}
       />
     </div>
   );

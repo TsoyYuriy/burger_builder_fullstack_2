@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./main-page.css";
 import Burger from "../../components/Burger/Burger";
 import { Controls } from "../../components/Controls/Controls";
-import { ING_PRICE } from "../../utils.constants";
+import { ING_PRICE } from "../../utils/utils.constants";
 import { Modal } from "../../components/UI/Modal/Modal";
 import { OrderSummary } from "../../components/Burger/OrderSummary/OrderSummary";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 export const MainPage = () => {
   const [ingredients, setIngredients] = useState({
@@ -64,8 +64,15 @@ export const MainPage = () => {
   const closeModalHandler = () => setIsShowModal(false);
 
   const purchaseContinueHandler = () => {
-    navigate('/checkout', {state: {ingredients, totalPrice}});
-  }
+    //   navigate('/checkout', {state: {ingredients, totalPrice}});
+
+    const params = new createSearchParams(ingredients);
+
+    navigate({
+      pathname: "/checkout",
+      search: params.toString(),
+    });
+  };
 
   return (
     <>

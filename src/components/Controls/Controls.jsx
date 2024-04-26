@@ -1,9 +1,15 @@
 import React from "react";
 import { Conrol } from "./Control/Conrol";
-import { controls } from "../../utils.constants";
-import './controls.css';
+import { controls } from "../../utils/utils.constants";
+import "./controls.css";
 
-export const Controls = ({ totalPrice, ingredAdded, ingredRemoved, purchasable, onClickShowModal }) => {
+export const Controls = ({
+  totalPrice,
+  ingredAdded,
+  ingredRemoved,
+  purchasable,
+  onClickShowModal,
+}) => {
   return (
     <div>
       <p>
@@ -11,15 +17,23 @@ export const Controls = ({ totalPrice, ingredAdded, ingredRemoved, purchasable, 
       </p>
 
       {controls.map((contr) => {
-        return <Conrol 
-                key={contr.type} 
-                type={contr.type} 
-                added={() => ingredAdded(contr.type)}
-                removed={() => ingredRemoved(contr.type)}
-              />;
+        return (
+          <Conrol
+            key={contr.type}
+            type={contr.type}
+            added={() => ingredAdded(contr.type)}
+            removed={() => ingredRemoved(contr.type)}
+          />
+        );
       })}
 
-      <button className="OrderButton" disabled={!purchasable} onClick={onClickShowModal}>Order now</button>
+      <button
+        className="OrderButton"
+        disabled={!purchasable}
+        onClick={onClickShowModal}
+      >
+        Order now
+      </button>
     </div>
   );
 };
