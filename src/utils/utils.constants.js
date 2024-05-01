@@ -12,3 +12,14 @@ export const ING_PRICE = {
   cheese: 200,
   meat: 600,
 }
+
+export const navItem = [ 
+  {
+    to: '/',
+    name: 'Burger Builder'
+  },
+  {
+    to: '/ordes',
+    name: 'Orders'
+  },
+]

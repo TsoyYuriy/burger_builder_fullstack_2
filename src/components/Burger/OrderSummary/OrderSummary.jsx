@@ -1,4 +1,5 @@
 import React from 'react'
+import './order-summary.css'
 
 export const OrderSummary = ({ingred, price, onCloseModal, onContinue}) => {
 
@@ -20,8 +21,10 @@ export const OrderSummary = ({ingred, price, onCloseModal, onContinue}) => {
       <p>Total price: {price}</p>
       <p>Continue to checkout?</p>
       
-      <button onClick={onCloseModal}>Cancel</button>
-      <button onClick={onContinue}>Continue</button>
+      <div className='buttons'>
+        <button onClick={onCloseModal}>Cancel</button>
+        <button onClick={onContinue}>Continue</button>
+      </div>
     </div>
   )
 }

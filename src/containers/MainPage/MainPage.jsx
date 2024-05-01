@@ -64,14 +64,14 @@ export const MainPage = () => {
   const closeModalHandler = () => setIsShowModal(false);
 
   const purchaseContinueHandler = () => {
-    //   navigate('/checkout', {state: {ingredients, totalPrice}});
+      navigate('/checkout', {state: {ingredients, totalPrice}});
 
-    const params = new createSearchParams(ingredients);
+    // const params = new createSearchParams(ingredients);
 
-    navigate({
-      pathname: "/checkout",
-      search: params.toString(),
-    });
+    // navigate({
+    //   pathname: "/checkout",
+    //   search: params.toString(),
+    // });
   };
 
   return (
