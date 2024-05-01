@@ -23,3 +23,30 @@ export const navItem = [
     name: 'Orders'
   },
 ]
+
+export const inputForm = [
+  {
+    type: 'text',
+    name: 'user-name',
+    placeholder: 'Your name',
+  },
+
+  {
+    type: 'email',
+    name: 'email',
+    placeholder: 'Your email',
+  },
+
+  {
+    type: 'text',
+    name: 'street',
+    placeholder: 'Your street',
+  },
+
+  {
+    type: 'text',
+    name: 'postal',
+    placeholder: 'Your postal',
+  },
+
+]

@@ -1,78 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./main-page.css";
 import Burger from "../../components/Burger/Burger";
 import { Controls } from "../../components/Controls/Controls";
 import { ING_PRICE } from "../../utils/utils.constants";
 import { Modal } from "../../components/UI/Modal/Modal";
 import { OrderSummary } from "../../components/Burger/OrderSummary/OrderSummary";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { addIngredients, removeIngredients, updatePurchase } from "../../store/ingredSlice";
 
 export const MainPage = () => {
-  const [ingredients, setIngredients] = useState({
-    salad: 0,
-    bacon: 0,
-    cheese: 0,
-    meat: 0,
-  });
 
-  const [totalPrice, setTotalPrice] = useState(100);
-  const [purchasable, setPurchasable] = useState(false);
+  // мои глобальный стейт
+  const { ingredients, totalPrice, purchasable } = useSelector(state => state.ingredients) 
+
+  // позволяет работать с actions
+  const dispatch = useDispatch() 
+
   const [isShowModal, setIsShowModal] = useState(false);
   const navigate = useNavigate();
 
-  const updatePurchase = (updateIngrs) => {
-    const sum = Object.keys(updateIngrs)
-      .map((igKey) => updateIngrs[igKey])
-      .reduce((sum, el) => sum + el, 0);
-
-    setPurchasable(sum > 0);
-  };
-
   const addIngHandler = (type) => {
-    const oldCount = ingredients[type];
-    const updateCount = oldCount + 1;
-    const updateIngrs = { ...ingredients };
-    updateIngrs[type] = updateCount;
-    setIngredients(updateIngrs);
-
-    const priceAdded = ING_PRICE[type]; // 50 || 100
-    const oldPrice = totalPrice;
-    const newPrice = oldPrice + priceAdded;
-    setTotalPrice(newPrice);
-
-    updatePurchase(updateIngrs);
+    // вызываю dispatch передаю в него addIngredients из redusers
+    dispatch( addIngredients(type) )  
+    dispatch(updatePurchase())
   };
 
   const removeIngHandler = (type) => {
-    const oldCount = ingredients[type];
-
-    if (oldCount <= 0) return;
-
-    const updateCount = oldCount - 1;
-    const updateIngrs = { ...ingredients };
-    updateIngrs[type] = updateCount;
-    setIngredients(updateIngrs);
-
-    const priceAdded = ING_PRICE[type]; // 50 || 100
-    const oldPrice = totalPrice;
-    const newPrice = oldPrice - priceAdded;
-    setTotalPrice(newPrice);
-
-    updatePurchase(updateIngrs);
+    dispatch( removeIngredients(type) )
+    dispatch(updatePurchase())
   };
 
   const closeModalHandler = () => setIsShowModal(false);
 
   const purchaseContinueHandler = () => {
-      navigate('/checkout', {state: {ingredients, totalPrice}});
-
-    // const params = new createSearchParams(ingredients);
-
-    // navigate({
-    //   pathname: "/checkout",
-    //   search: params.toString(),
-    // });
+    navigate("/checkout", {
+      state: {
+        ingredients,
+        totalPrice,
+      },
+    });
   };
+
+  useEffect(() => {
+    updatePurchase(ingredients);
+  }, [ingredients]);
 
   return (
     <>

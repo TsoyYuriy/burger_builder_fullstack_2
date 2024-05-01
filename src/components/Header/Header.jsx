@@ -15,8 +15,8 @@ export const Header = () => {
         <ul className="NavigationItems">
           {navItem.map((item) => {
             return (
-              <li className="NavigationItem">
-                <NavLink key={item.name} to={item.to}>
+              <li key={item.name} className="NavigationItem">
+                <NavLink to={item.to}>
                   {item.name}
                 </NavLink>
               </li>
