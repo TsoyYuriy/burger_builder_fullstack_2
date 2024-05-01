@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./contact-data.css";
 import { inputForm } from "../../../utils/utils.constants";
-import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const ContactData = () => {
 
-  const location = useLocation()
+  const {ingredients, totalPrice} = useSelector(state => state.ingredients)
   
   const [order, setOrder] = useState({
     'user-name': "",
@@ -23,8 +23,6 @@ export const ContactData = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    const { ingredients, totalPrice } = location.state;
 
     const customer = {
       ingredients,

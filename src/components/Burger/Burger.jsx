@@ -1,16 +1,14 @@
 import React from "react";
 import { Ingredient } from "./Ingredient/Ingredient";
 import "./burger.css";
+import { useSelector } from "react-redux";
 
-// {
-//   salad: 2,
-//   bacon: 5,
-//   cheese: 2,
-//   meat: 5,
-// }
-const Burger = ({ ingredients }) => {
 
-  const ingredientKeys = Object.keys(ingredients); // [salad, bacon, cheese, meat]
+const Burger = () => {
+
+  const { ingredients } = useSelector(state => state.ingredients)
+
+  const ingredientKeys = Object.keys(ingredients);
   let ingredientsArray = [];
 
   ingredientKeys.forEach((igKey) => {

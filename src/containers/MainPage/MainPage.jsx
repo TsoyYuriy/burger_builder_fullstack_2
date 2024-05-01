@@ -34,21 +34,12 @@ export const MainPage = () => {
   const closeModalHandler = () => setIsShowModal(false);
 
   const purchaseContinueHandler = () => {
-    navigate("/checkout", {
-      state: {
-        ingredients,
-        totalPrice,
-      },
-    });
+    navigate("/checkout");
   };
-
-  useEffect(() => {
-    updatePurchase(ingredients);
-  }, [ingredients]);
 
   return (
     <>
-      <Burger ingredients={ingredients} />
+      <Burger />
 
       <Controls
         totalPrice={totalPrice}
