@@ -19,7 +19,7 @@ export const navItem = [
     name: 'Burger Builder'
   },
   {
-    to: '/ordes',
+    to: '/orders',
     name: 'Orders'
   },
 ]

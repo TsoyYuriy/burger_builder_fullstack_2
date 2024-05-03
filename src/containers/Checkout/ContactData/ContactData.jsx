@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import "./contact-data.css";
 import { inputForm } from "../../../utils/utils.constants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { push, ref, set } from "firebase/database";
+import { db } from "../../../config/firebase.config";
+import { useNavigate } from "react-router-dom";
 
 export const ContactData = () => {
 
+  const navigate = useNavigate()
   const {ingredients, totalPrice} = useSelector(state => state.ingredients)
   
   const [order, setOrder] = useState({
@@ -30,7 +34,17 @@ export const ContactData = () => {
       totalPrice
     }
 
-    console.log(customer);
+    const data = ref(db, 'orders')
+
+    const newOrder = push( data );
+
+    set(newOrder , customer)
+      .then(() => {
+        alert('Data saved') 
+        navigate('/');
+      })
+      .catch( err => console.error(err))
+
   }
 
   return (

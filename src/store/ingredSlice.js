@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ING_PRICE } from "../utils/utils.constants";
 
-
-const name = 'ingredients';
+const name = "ingredients";
 
 const initialState = {
   ingredients: {
@@ -12,8 +11,8 @@ const initialState = {
     meat: 0,
   },
   totalPrice: 100,
-  purchasable: false 
-}
+  purchasable: false,
+};
 
 const ingredSlice = createSlice({
   name,
@@ -22,8 +21,8 @@ const ingredSlice = createSlice({
     addIngredients(state, action) {
       state.ingredients = {
         ...state.ingredients,
-        [action.payload]: state.ingredients[action.payload] + 1 || 0
-      }
+        [action.payload]: state.ingredients[action.payload] + 1 || 0,
+      };
 
       state.totalPrice += ING_PRICE[action.payload];
     },
@@ -33,21 +32,32 @@ const ingredSlice = createSlice({
 
       state.ingredients = {
         ...state.ingredients,
-        [action.payload]: state.ingredients[action.payload] - 1 || 0
-      }
+        [action.payload]: state.ingredients[action.payload] - 1 || 0,
+      };
 
       state.totalPrice -= ING_PRICE[action.payload];
     },
 
-    updatePurchase (state) {
+    updatePurchase(state) {
       const sum = Object.keys(state.ingredients)
         .map((igKey) => state.ingredients[igKey])
         .reduce((sum, el) => sum + el, 0);
       state.purchasable = sum > 0;
-    }
-  }
-})
+    },
 
-export const { addIngredients, removeIngredients, updatePurchase } = ingredSlice.actions;
+    reset (state) {
+      state.ingredients = {
+        salad: 0,
+        bacon: 0,
+        cheese: 0,
+        meat: 0,
+      };
+      state.totalPrice = 100;
+    },
+  },
+});
+
+export const { addIngredients, removeIngredients, updatePurchase, reset } =
+  ingredSlice.actions;
 
 export default ingredSlice.reducer;

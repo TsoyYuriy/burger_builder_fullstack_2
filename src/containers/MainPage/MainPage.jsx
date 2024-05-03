@@ -7,7 +7,7 @@ import { Modal } from "../../components/UI/Modal/Modal";
 import { OrderSummary } from "../../components/Burger/OrderSummary/OrderSummary";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { addIngredients, removeIngredients, updatePurchase } from "../../store/ingredSlice";
+import { addIngredients, removeIngredients, reset, updatePurchase } from "../../store/ingredSlice";
 
 export const MainPage = () => {
 
@@ -36,6 +36,10 @@ export const MainPage = () => {
   const purchaseContinueHandler = () => {
     navigate("/checkout");
   };
+
+  useEffect(() => {
+    dispatch(reset())
+  }, []);
 
   return (
     <>

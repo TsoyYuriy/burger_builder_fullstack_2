@@ -1,0 +1,25 @@
+
+.order-card {
+  display: flex;
+  border: 1px solid linen;
+  border-radius: 10px;
+  gap: 50px;
+  margin-bottom: 30px;
+  padding: 10px 30px;
+}
+.order-card__title {
+  margin-bottom: 5px;
+}
+
+.customer {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
